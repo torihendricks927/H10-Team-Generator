@@ -42,12 +42,11 @@ function createManager() {
             name: 'managerEmail',
             message: "What is manager email?",
             validate: (answer) => {
-                const pass = answer.match(/\S+@\S+\.\S+/)
-                if (pass) {
-                    return true
-                }
-                return 'Please enter a valid email'
-            }
+                    if (answer !== '') {
+                        return true;
+                    }
+                    return "Please enter information asked";
+                },
         },
         {
             type: 'input',
@@ -66,13 +65,107 @@ function createManager() {
                 answers.managerName,
                 answers.managerId,
                 answers.managerEmail,
-                answers,managerOfficeNumber
+                answers.managerOfficeNumber,
             );
             teamMembers.manager = manager
             idArray.push(answers.managerId);
-            buildTeam();
+            createTeam();
     });
 }
+
+function createTeam() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'choice',
+            message: "What is job title being added?",
+            choices: [
+                'Engineer',
+                'Intern',
+                'I dont want to add any more',
+            ]
+        }
+    ]).then((answers) => {
+        switch (answers.choice) {
+            case 'Engineer':
+                addEngineer()
+                break
+            case 'Intern':
+                addIntern()
+                break
+            default:
+                buildTeam();
+        }
+    });
+}
+
+function addEngineer() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            validate: (answer) => {
+                if (answer !== '') {
+                    return true;
+                }
+                return "Please enter information asked";
+            },
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the ID?",
+            validate: (answer) => {
+                const pass = answer.match(/^[1-9]\d*$/)
+                if (pass) {
+                    if (idArray.includes(answer)) {
+                        return "this ID is already taken"
+                    } else {
+                    return true
+                    }
+                }
+                return 'Please enter a positive number greater than 0'
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the email?",
+            validate: (answer) => {
+                const pass = answer.match(/\S+@\S+\.\S+/)
+                if (pass) {
+                    return true
+                }
+                return 'Please enter a valid email'
+            }
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "What is your github?",
+            validate: (answer) => {
+                if (answer !== '') {
+                    return true;
+                }
+                return "Please enter information asked";
+            },
+        },
+    ]).then((answers) => {
+            const engineer = new Engineer(
+                answers.name,
+                answers.id,
+                answers.email,
+                answers.github,
+            );
+            teamMembers.engineers.push(manager)
+            idArray.push(answers.id);
+            createTeam();
+    });
+}
+
+
+
+function addIntern() {}
 
 
 
