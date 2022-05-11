@@ -1,5 +1,17 @@
 function renderManager(manager) {
-    return `manager`;
+    return `
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">${manager.getName()}</h5>
+            <h6 class="card-subtitle mb-2">${manager.getRole()}</h6>
+        </div>
+  
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${manager.getId()}</li>
+            <li class="list-group-item">Email: ${manager.getEmail()}</li>
+            <li class="list-group-item">Office Number: ${manager.getOffice}</li>
+        </ul>
+    </div>`;
 }
 function renderEngineer(engineers) {
     return `engineer`;
