@@ -16,8 +16,8 @@ const idArray = [];
 function createManager() {
     inquirer.prompt([
         {
-            type: 'input',
-            name: 'managerName',
+            type: "input",
+            name: "managerName",
             validate: (answer) => {
                 if (answer !== '') {
                     return true;
@@ -26,20 +26,20 @@ function createManager() {
             },
         },
         {
-            type: 'input',
-            name: 'managerID',
+            type: "input",
+            name: "managerId",
             message: "What is manager ID?",
             validate: (answer) => {
                 const pass = answer.match(/^[1-9]\d*$/)
                 if (pass) {
                     return true
                 }
-                return 'Please enter a positive number greater than 0'
+                return "Please enter a positive number greater than 0";
             }
         },
         {
-            type: 'input',
-            name: 'managerEmail',
+            type: "input",
+            name: "managerEmail",
             message: "What is manager email?",
             validate: (answer) => {
                     if (answer !== '') {
@@ -49,8 +49,8 @@ function createManager() {
                 },
         },
         {
-            type: 'input',
-            name: 'managerOfficeNumber',
+            type: "input",
+            name: "managerOfficeNumber",
             message: "What is manager office number?",
             validate: (answer) => {
                 const pass = answer.match(/^[1-9]\d*$/)
@@ -65,7 +65,7 @@ function createManager() {
                 answers.managerName,
                 answers.managerId,
                 answers.managerEmail,
-                answers.managerOfficeNumber,
+                answers.managerOfficeNumber
             );
             teamMembers.manager = manager
             idArray.push(answers.managerId);
@@ -76,21 +76,21 @@ function createManager() {
 function createTeam() {
     inquirer.prompt([
         {
-            type: 'list',
-            name: 'choice',
+            type: "list",
+            name: "choice",
             message: "What is job title being added?",
             choices: [
-                'Engineer',
-                'Intern',
-                'I dont want to add any more',
+                "Engineer",
+                "Intern",
+                "I dont want to add any more",
             ]
         }
     ]).then((answers) => {
         switch (answers.choice) {
-            case 'Engineer':
+            case "Engineer":
                 addEngineer()
                 break
-            case 'Intern':
+            case "Intern":
                 addIntern()
                 break
             default:
@@ -102,8 +102,8 @@ function createTeam() {
 function addEngineer() {
     inquirer.prompt([
         {
-            type: 'input',
-            name: 'name',
+            type: "input",
+            name: "name",
             validate: (answer) => {
                 if (answer !== '') {
                     return true;
@@ -112,8 +112,8 @@ function addEngineer() {
             },
         },
         {
-            type: 'input',
-            name: 'id',
+            type: "input",
+            name: "id",
             message: "What is the ID?",
             validate: (answer) => {
                 const pass = answer.match(/^[1-9]\d*$/)
@@ -124,24 +124,24 @@ function addEngineer() {
                     return true
                     }
                 }
-                return 'Please enter a positive number greater than 0'
+                return "Please enter a positive number greater than 0";
             }
         },
         {
-            type: 'input',
-            name: 'email',
+            type: "input",
+            name: "email",
             message: "What is the email?",
             validate: (answer) => {
                 const pass = answer.match(/\S+@\S+\.\S+/)
                 if (pass) {
                     return true
                 }
-                return 'Please enter a valid email'
+                return "Please enter a valid email";
             }
         },
         {
-            type: 'input',
-            name: 'github',
+            type: "input",
+            name: "github",
             message: "What is your github?",
             validate: (answer) => {
                 if (answer !== '') {
@@ -157,7 +157,7 @@ function addEngineer() {
                 answers.email,
                 answers.github,
             );
-            teamMembers.engineers.push(manager)
+            teamMembers.engineers.push(engineer);
             idArray.push(answers.id);
             createTeam();
     });
