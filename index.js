@@ -199,12 +199,11 @@ function addIntern() {
         name: "email",
         message: "what is the email",
         validate: (answer) => {
-          const pass = answer.match(/\S+@\S+\.\S+/);
-          if (pass) {
-            return true;
-          }
-          return "Please enter a valid email";
-        },
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter at least one character";
+          },
       },
       {
         type: "input",
